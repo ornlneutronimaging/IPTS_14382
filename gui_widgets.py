@@ -25,11 +25,11 @@ def gui_fname(dir=None, message='', ext='tif'):
     if ext == 'tif':
         _filter = "TIFF (*.tif)"
     elif ext == 'fits':
-        _filter = 'FITS (*.fits)"
+        _filter = "FITS (*.fits)"
     elif ext == 'txt':
-        _filter = 'ascii (*.txt)"
+        _filter = "ascii (*.txt)"
     elif ext == 'dat':
-        _filter = 'data (*.dat)"
+        _filter = "data (*.dat)"
     _filter = _filter + ";;All (*.*)"
         
     fname = QFileDialog.getOpenFileNames(None, message,
