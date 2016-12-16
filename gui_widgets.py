@@ -9,7 +9,7 @@ from decorators import format_directory
 
 
 @format_directory
-def gui_dname(dir=None):
+def gui_dname(dir=None, message=''):
     """Select files"""
     dirname = QFileDialog.getExistingDirectory(None, "Select Folder ...", 
                                             dir, 
@@ -40,22 +40,26 @@ def gui_fname(dir=None, message='', ext='tif'):
 
 
 @format_directory
-def gui_single_file(dir=None):
+def gui_single_file(dir=None, message=''):
     """Select one o file via a dialog and returns the file name.
     """
     if dir is None: 
         dir ='./'
-    fname = QFileDialog.getOpenFileName(None, "Select file...", 
+    if message == '':
+        message = 'Select File ...'
+    fname = QFileDialog.getOpenFileName(None, message, 
             dir, filter="Spectra File (*_Spectra.txt)")
     return fname
 
 
 @format_directory
-def gui_csv_fname(dir=None):
+def gui_csv_fname(dir=None, message=''):
     """Select one or more file via a dialog and returns the file name.
     """
     if dir is None: 
         dir ='./'
-    fname = QFileDialog.getOpenFileNames(None, "Select file(s)...", 
+    if message == '':
+        message = 'Select Files(s) ...'
+    fname = QFileDialog.getOpenFileNames(None, message, 
             dir, filter="Fits files(*.csv)")
     return fname

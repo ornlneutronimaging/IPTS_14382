@@ -6,7 +6,7 @@ def format_directory(function):
     os system. On Mac, pyqt does not like seing the '\' replacing the white spaces.
     '''
     
-    def new_function(dir=None, message='', ext='tif'):
+    def new_function(dir=None, **kwargs):
 
         if dir is None:
             dir = './'
@@ -15,7 +15,7 @@ def format_directory(function):
         else:
             if os.sys.platform == 'darwin':
                 dir = dir.replace('\\','')
-        return function(dir=dir, message=message, ext=ext)
+        return function(dir=dir, **kwargs)
                 
     return new_function
         
