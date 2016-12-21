@@ -34,6 +34,8 @@ def gui_fname(dir=None, message='', ext='tif'):
         _filter = "data (*.dat)"
     elif ext == 'csv':
         _filter = 'ascii (*.csv)'
+    else:
+        _filter = '{} (*{})'.format(ext, ext)
     _filter = _filter + ";;All (*.*)"
         
     fname = QFileDialog.getOpenFileNames(None, message,
