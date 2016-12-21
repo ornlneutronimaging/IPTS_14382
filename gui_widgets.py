@@ -11,7 +11,9 @@ from decorators import format_directory
 @format_directory
 def gui_dname(dir=None, message=''):
     """Select files"""
-    dirname = QFileDialog.getExistingDirectory(None, "Select Folder ...", 
+    if message == '':
+        message = 'Select Folder ...'
+    dirname = QFileDialog.getExistingDirectory(None, message, 
                                             dir, 
                                             QFileDialog.ShowDirsOnly)
     return dirname
@@ -30,6 +32,8 @@ def gui_fname(dir=None, message='', ext='tif'):
         _filter = "ascii (*.txt)"
     elif ext == 'dat':
         _filter = "data (*.dat)"
+    elif ext == 'csv':
+        _filter = 'ascii (*.csv)'
     _filter = _filter + ";;All (*.*)"
         
     fname = QFileDialog.getOpenFileNames(None, message,
@@ -40,26 +44,22 @@ def gui_fname(dir=None, message='', ext='tif'):
 
 
 @format_directory
-def gui_single_file(dir=None, message=''):
+def gui_single_file(dir=None):
     """Select one o file via a dialog and returns the file name.
     """
     if dir is None: 
         dir ='./'
-    if message == '':
-        message = 'Select File ...'
-    fname = QFileDialog.getOpenFileName(None, message, 
+    fname = QFileDialog.getOpenFileName(None, "Select file...", 
             dir, filter="Spectra File (*_Spectra.txt)")
     return fname
 
 
 @format_directory
-def gui_csv_fname(dir=None, message=''):
+def gui_csv_fname(dir=None):
     """Select one or more file via a dialog and returns the file name.
     """
     if dir is None: 
         dir ='./'
-    if message == '':
-        message = 'Select Files(s) ...'
-    fname = QFileDialog.getOpenFileNames(None, message, 
+    fname = QFileDialog.getOpenFileNames(None, "Select file(s)...", 
             dir, filter="Fits files(*.csv)")
     return fname
