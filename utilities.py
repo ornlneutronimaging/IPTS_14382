@@ -32,3 +32,6 @@ def extract_temperature(index=-1, temperature_array=[], time_stamp_array=[]):
 
     return file_temperature
 
+def retrieve_T_from_file_vs_temperature_array(file_name='', file_array=[], temperature_array=[]):
+    index = file_array.index(file_name)
+    return temperature_array[index]
