@@ -39,3 +39,8 @@ def save_file(folder='', base_file_name='', suffix='', dictionary={}):
     pickle.dump(dictionary, open(output_file, "wb"))
     
     return output_file
+
+def get_file_duration(file_name):
+    hdu_list = pyfits.open(file_name)
+    hdu_0 = hdu_list[0]
+    return hdu_0.header['EXPOSURE']
