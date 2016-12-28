@@ -44,3 +44,33 @@ def get_file_duration(file_name):
     hdu_list = pyfits.open(file_name)
     hdu_0 = hdu_list[0]
     return hdu_0.header['EXPOSURE']
+
+def read_fits(list_files):
+    '''takes a list of files, load them using pyfits and return a list of 
+    arrays of data
+    '''
+    data = []
+    
+    for _file in list_files:
+
+        hdu_list = pyfits.open(_file)  # fits
+        hdu = hdu_list[0]
+        _image = hdu.data
+        _image = np.asarray(_image)
+        data.append(_image)
+        hdu_list.close()
+    return data    
+
+def export_file(data, output_folder, base_file_name):
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    _full_output_file_name = os.path.join(output_folder, base_file_name)
+
+    if os.path.exists(_full_output_file_name):
+        return
+    
+    hdu = pyfits.PrimaryHDU(data)
+    hdulist = pyfits.HDUList([hdu])
+    hdulist.writeto(_full_output_file_name)
+    hdulist.close()
