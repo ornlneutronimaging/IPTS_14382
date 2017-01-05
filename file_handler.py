@@ -2,6 +2,8 @@ import os
 import pyfits
 import numpy as np
 import pickle
+import shutil
+
 
 def load_data(file_name):
     '''
@@ -61,7 +63,7 @@ def read_fits(list_files):
         hdu_list.close()
     return data    
 
-def export_file(data, output_folder, base_file_name):
+def export_file(data=[], output_folder='', base_file_name=''):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -74,3 +76,9 @@ def export_file(data, output_folder, base_file_name):
     hdulist = pyfits.HDUList([hdu])
     hdulist.writeto(_full_output_file_name)
     hdulist.close()
+    
+def make_or_reset_folder(folder_name):
+    if os.path.exists(folder_name):
+         shutil.rmtree(folder_name)
+    os.makedirs(folder_name)         
+   

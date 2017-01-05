@@ -37,35 +37,32 @@ def retrieve_T_from_file_vs_temperature_array(file_name='', file_array=[], tempe
     index = file_array.index(file_name)
     return temperature_array[index]
 
-def make_output_file_name(_files_to_merge, algorithm='mean'):
+def make_output_file_name(bin_number=-1, index=-1, algorithm='mean'):
     '''
-    takes the list of files to add and create the output file name 
+    takes the bin number and the algorithm name to create the output file name 
     
     Paramters:
-        * _files_to_merge: list of files to merge
-        * algorithm: (optional) default value 'add'. Name of algorithm used to bin data
+        * bin_number: index of bin
+        * index: index of file in folder
+        * algorithm: (optional) default value 'mean'. Name of algorithm used to bin data
             will be used in the new output file name
             
     Return:
         * string file name of the output file
         
     Example:
-        _files_to_merge = []'/Users/me/Image0001_00000.fits','/Users/me/Image0002_00000.fits']
+        bin_number = 3
+        index = 2
+        algorithm = "mean"
         
-        will return  'Image00001_Image00002_0000_add.fits
+        will return  'bin#3_0002_mean.fits
     
     '''
     
     ext = '.fits'
     list_output_file_name = []
-    
-    for _file in _files_to_merge:
-            _basename = os.path.basename(_file)
-            [_basename, suffix] = _basename.split('_')
-            list_output_file_name.append(_basename)
-
-    _output_file_name = '_'.join(list_output_file_name)
-    return (_output_file_name, _output_file_name + '_' + algorithm + '.' + suffix)
+    _output_file_name = "bin#{:03d}_{:04d}_{}.fits".format(bin_number, index, algorithm)
+    return _output_file_name
 
 def keep_folder_name(image):
     image_array = image.split('_')
