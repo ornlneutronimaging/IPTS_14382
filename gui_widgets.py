@@ -38,6 +38,7 @@ def gui_fname(dir=None, message='', ext='tif'):
         _filter = '{} (*{})'.format(ext, ext)
     _filter = _filter + ";;All (*.*)"
         
+    app = QtGui.QApplication([dir])
     fname = QFileDialog.getOpenFileNames(None, message,
                                          directory = dir, 
                                          filter = _filter)
