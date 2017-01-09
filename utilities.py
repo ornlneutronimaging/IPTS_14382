@@ -75,3 +75,23 @@ def is_extension(filename='', ext='.fits'):
     else:
         return False
     
+def index_first_boolean(result, boolean=True):
+    for _index, _value in enumerate(result):
+        if _value == boolean:
+            return _index
+        
+def index_last_boolean(result, boolean=True):
+    for _index, _value in reversed(list(enumerate(result))):
+        if _value == boolean:
+            return _index
+        
+def find_index_of_value_in_array(array=[], value=-1, index_type='le'):
+    '''
+    index_type is either 'le' or 'ge'
+    '''
+    if index_type == 'le':
+        result = x_axis < value
+        return index_first_boolean(result, False)
+    else:
+        result = x_axis > value
+        return index_last_boolean(result, False)
