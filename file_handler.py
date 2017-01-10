@@ -70,12 +70,17 @@ def read_fits(list_files):
         hdu_list.close()
     return data    
 
+def make_fits(data=[], filename=''):
+    hdu = pyfits.PrimaryHDU(data)
+    hdulist = pyfits.HDUList([hdu])
+    hdulist.writeto(filename)
+    hdulist.close()
+
 def export_file(data=[], output_folder='', base_file_name=''):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
     _full_output_file_name = os.path.join(output_folder, base_file_name)
-
     if os.path.exists(_full_output_file_name):
         return
     
