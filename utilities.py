@@ -95,3 +95,10 @@ def find_index_of_value_in_array(array=[], value=-1, index_type='le'):
     else:
         result = x_axis > value
         return index_last_boolean(result, False)
+    
+def make_user_friendly_list_of_bins(full_list_of_bins):
+    return [os.path.basename(_file) for _file in full_list_of_bins]
+        
+    
+    
+    

@@ -47,12 +47,19 @@ def get_file_duration(file_name):
     hdu_0 = hdu_list[0]
     return hdu_0.header['EXPOSURE']
 
+def read_single_fits(file):
+    hdu_list = pyfits.open(file)  # fits
+    hdu = hdu_list[0]
+    _image = hdu.data
+    _image = np.asarray(_image)
+    hdu_list.close()
+    return _image
+    
 def read_fits(list_files):
     '''takes a list of files, load them using pyfits and return a list of 
     arrays of data
     '''
     data = []
-    
     for _file in list_files:
 
         hdu_list = pyfits.open(_file)  # fits
@@ -81,4 +88,24 @@ def make_or_reset_folder(folder_name):
     if os.path.exists(folder_name):
          shutil.rmtree(folder_name)
     os.makedirs(folder_name)         
+    
+def remove_SummedImg_from_list(list_files):
+    base_name_and_extension = os.path.basename(list_files[0])
+    dir_name = os.path.dirname(list_files[0])
+    [base_name, _] = os.path.splitext(base_name_and_extension)
+    [base_base_name, _] = base_name.split('_')
+    [name, index] = base_name.split('_')
+    file_to_remove = os.path.join(dir_name, base_base_name + '_SummedImg.fits')
+    list_files_cleaned = []
+    for _file in list_files:
+        if _file == file_to_remove:
+            continue
+        list_files_cleaned.append(_file)
+    return list_files_cleaned
+    
+
+    
+    
+    
+    
    
