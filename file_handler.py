@@ -98,9 +98,10 @@ def remove_SummedImg_from_list(list_files):
     base_name_and_extension = os.path.basename(list_files[0])
     dir_name = os.path.dirname(list_files[0])
     [base_name, _] = os.path.splitext(base_name_and_extension)
-    [base_base_name, _] = base_name.split('_')
-    [name, index] = base_name.split('_')
-    file_to_remove = os.path.join(dir_name, base_base_name + '_SummedImg.fits')
+    base_base_name_array = base_name.split('_')
+    name = '_'.join(base_base_name_array[0:-1])
+    index = base_base_name_array[-1]
+    file_to_remove = os.path.join(dir_name, name + '_SummedImg.fits')
     list_files_cleaned = []
     for _file in list_files:
         if _file == file_to_remove:
