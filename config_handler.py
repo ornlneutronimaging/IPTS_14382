@@ -6,18 +6,28 @@ except ImportError:
 def init_config():
     settings = QSettings('settings.ini', QSettings.IniFormat)
     
-def save_config(key='', value=''):
+def save_config(key='', value='', group=''):
     settings = QSettings('settings.ini')
+    if not (group == ''):
+        settings.beginGroup(group)
+
     if value == '':
         value = None
-    settings.setValue(key, str(value))
+    settings.setValue(key, value)
     
-def load_config(key='', default_value=''):
+    if not (group == ''):
+        settings.endGroup()
+    
+def load_config(key='', default_value='', group=''):
     settings = QSettings('settings.ini')
+    if not (group == ''):
+        settings.beginGroup(group)
+
     value = settings.value(key)
+    settings.endGroup()
     if (value is None) or (value == 'None'):
         return default_value
     else:
-        return str(value)
+        return value
 
     
