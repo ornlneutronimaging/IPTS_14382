@@ -23,25 +23,23 @@ def gui_dname(dir=None, message=''):
 def gui_fname(dir=None, message='', ext='tif'):
     """Select one or more file via a dialog and returns the file name.
     """
-    _filter = ''
     if ext == 'tif':
-        _filter = "TIFF (*.tif)"
+        filter = "TIFF (*.tif)"
     elif ext == 'fits':
-        _filter = "FITS (*.fits)"
+        filter = "FITS (*.fits)"
     elif ext == 'txt':
-        _filter = "ascii (*.txt)"
+        filter = "ascii (*.txt)"
     elif ext == 'dat':
-        _filter = "data (*.dat)"
+        filter = "data (*.dat)"
     elif ext == 'csv':
-        _filter = 'ascii (*.csv)'
+        filter = 'ascii (*.csv)'
     else:
-        _filter = '{} (*{})'.format(ext, ext)
-    _filter = _filter + ";;All (*.*)"
+        filter = '{} (*{})'.format(ext, ext)
+    filter = filter + ";;All (*.*)"
         
-    app = QtGui.QApplication([dir])
     fname = QFileDialog.getOpenFileNames(None, message,
                                          directory = dir, 
-                                         filter = _filter)
+                                         filter = filter)
 
     return fname
 
